@@ -18,6 +18,10 @@ class App extends React.Component<any, State> {
     });
   }
 
+  shouldComponentUpdate(nextProps: any, nextState: State) {
+    return (this.state.currentLanguage !== nextState.currentLanguage)
+  }
+
   changeCurrentLanguage = (language: string) => {
     this.setState({
       currentLanguage: language,
