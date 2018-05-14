@@ -18,11 +18,17 @@ class App extends React.Component<any, State> {
     });
   }
 
+  changeCurrentLanguage = (language: string) => {
+    this.setState({
+      currentLanguage: language,
+    });
+  }
+
   render() {
     const { languages } = this.state;
     return (
       <div>
-        <LanguageList languages={languages} />
+        <LanguageList languages={languages} onClick={this.changeCurrentLanguage} />
       </div>
 
     )
