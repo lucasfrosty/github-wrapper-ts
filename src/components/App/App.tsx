@@ -1,5 +1,6 @@
 import * as React from 'react';
 import LanguageList from '../LanguageList';
+import RepoList from '../RepoList';
 
 interface State {
   currentLanguage: string | undefined;
@@ -14,12 +15,12 @@ class App extends React.Component<any, State> {
 
   componentDidMount() {
     this.setState({
-      currentLanguage: this.state.languages[0]
+      currentLanguage: this.state.languages[0],
     });
   }
 
   shouldComponentUpdate(nextProps: any, nextState: State) {
-    return (this.state.currentLanguage !== nextState.currentLanguage)
+    return (this.state.currentLanguage !== nextState.currentLanguage);
   }
 
   changeCurrentLanguage = (language: string) => {
@@ -29,13 +30,13 @@ class App extends React.Component<any, State> {
   }
 
   render() {
-    const { languages } = this.state;
+    const { languages, currentLanguage } = this.state;
     return (
       <div>
         <LanguageList languages={languages} onClick={this.changeCurrentLanguage} />
+        <RepoList language={currentLanguage} />
       </div>
-
-    )
+    );
   }
 }
 
