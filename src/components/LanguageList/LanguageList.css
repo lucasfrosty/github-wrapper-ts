@@ -1,0 +1,12 @@
+.LanguageList {
+  margin-top: 15px;
+}
+
+.LanguageList__Button {
+  background-color: transparent;
+  text-decoration: underline;
+  color: blue;
+  border: 0;
+  margin: 0 5px;
+  cursor: pointer
+}

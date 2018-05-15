@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './LanguageList.css';
 
 interface Props {
   languages: string[];
@@ -7,15 +8,15 @@ interface Props {
 
 function LanguageList({ languages, onClick }: Props) {
   return (
-    <React.Fragment>
+    <div className="LanguageList">
       {languages.map(language => {
         function onClickHandler() {
           onClick(language);
         }
 
-        return <button key={language} onClick={onClickHandler}>{language}</button>
+        return <button className="LanguageList__Button" key={language} onClick={onClickHandler}>{language}</button>
       })}
-    </React.Fragment>
+    </div>
   );
 }
 
