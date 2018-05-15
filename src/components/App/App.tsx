@@ -13,7 +13,7 @@ interface State {
   languages: ValidLanguage[];
 }
 
-function GET_CURRENT_USER(language: CurrentLanguage) {
+function GET_TOP_LANGUAGES(language: CurrentLanguage) {
   return gql`
     query {
       search(first: 10, query: "language:${language}", type: REPOSITORY) {
@@ -61,7 +61,7 @@ class App extends React.Component<any, State> {
   render() {
     const { languages, currentLanguage } = this.state;
     return (
-      <Query query={GET_CURRENT_USER(currentLanguage)}>
+      <Query query={GET_TOP_LANGUAGES(currentLanguage)}>
         {({ data, loading }) => {
           if (loading || !data) {
             return <div>Loading...</div>;
