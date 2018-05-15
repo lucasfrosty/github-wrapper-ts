@@ -3,18 +3,24 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import LanguageList from '../LanguageList';
-import RepoList from '../RepoList';
+import Repo, { IRepo } from '../Repo';
 
 interface State {
   currentLanguage: string | undefined;
   languages: string[];
 }
 
-const GET_CURRENT_USER = gql`
-  {
-    viewer {
-      login
-      name
+
+
+const GET_CURRENT_USER = (language: string | undefined) => gql`
+  query {
+    search(first: 10, query: "language:${language}", type: REPOSITORY) {
+      nodes {
+        ... on Repository {
+          description
+          name
+        }
+      }
     }
   }
 `;
@@ -44,16 +50,20 @@ class App extends React.Component<any, State> {
   render() {
     const { languages, currentLanguage } = this.state;
     return (
-      <Query query={GET_CURRENT_USER}>
+      <Query query={GET_CURRENT_USER(currentLanguage)}>
         {({ data, loading }) => {
           if (loading || !data) {
             return <div>Loading...</div>;
           }
 
+          console.log(data);
+
           return (
             <div>
               <LanguageList languages={languages} onClick={this.changeCurrentLanguage} />
-              <RepoList language={currentLanguage} viewer={data.viewer.name} />
+              {data.search.nodes.map((repo: IRepo) => (
+                <Repo key={repo.name} language={currentLanguage} repo={repo} />
+              ))}
             </div>
           );
         }}

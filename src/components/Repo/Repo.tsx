@@ -1,16 +1,23 @@
 import * as React from 'react';
-import './RepoList.css';
+import './Repo.css';
+
+export interface IRepo {
+  description: string;
+  name: string;
+}
 
 interface Props {
   language: string | undefined;
-  viewer?: string;
+  repo: IRepo;
 }
 
-function RepoList({ language, viewer }: Props) {
+
+function Repo({ language, repo }: Props) {
+  const { name, description } = repo;
   return (
     <React.Fragment>
-      <h1>{language}</h1>
-      <h2>{viewer}</h2>
+      <h1>{name}</h1>
+      <p>{description}</p>
 
       <div>
         <div className="Flex-Container">
@@ -36,4 +43,4 @@ function RepoList({ language, viewer }: Props) {
   )
 }
 
-export default RepoList;
+export default Repo;
