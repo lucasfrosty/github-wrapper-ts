@@ -10,20 +10,28 @@ interface State {
   languages: string[];
 }
 
-
-
-const GET_CURRENT_USER = (language: string | undefined) => gql`
-  query {
-    search(first: 10, query: "language:${language}", type: REPOSITORY) {
-      nodes {
-        ... on Repository {
-          description
-          name
+function GET_CURRENT_USER(language: string | undefined) {
+  return gql`
+    query {
+      search(first: 10, query: "language:${language}", type: REPOSITORY) {
+        nodes {
+          ... on Repository {
+            name,
+            nameWithOwner
+            url
+            owner {
+              avatarUrl
+              login
+            }
+            stargazers {
+              totalCount
+            }
+          }
         }
       }
     }
-  }
-`;
+  `;
+}
 
 class App extends React.Component<any, State> {
   state = {
@@ -62,7 +70,7 @@ class App extends React.Component<any, State> {
             <div>
               <LanguageList languages={languages} onClick={this.changeCurrentLanguage} />
               {data.search.nodes.map((repo: IRepo) => (
-                <Repo key={repo.name} language={currentLanguage} repo={repo} />
+                <Repo key={repo.name} repo={repo} />
               ))}
             </div>
           );
