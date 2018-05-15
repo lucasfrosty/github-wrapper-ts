@@ -1,1 +1,4 @@
-export { default as default } from './App';
+export {
+  default as default,
+  ValidLanguage
+} from './App';

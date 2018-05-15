@@ -5,12 +5,15 @@ import gql from 'graphql-tag';
 import LanguageList from '../LanguageList';
 import Repo, { IRepo } from '../Repo';
 
+export type ValidLanguage = 'javascript' | 'ruby' | 'python' | 'typescript' | 'java';
+export type CurrentLanguage = ValidLanguage | undefined;
+
 interface State {
-  currentLanguage: string | undefined;
-  languages: string[];
+  currentLanguage: CurrentLanguage;
+  languages: ValidLanguage[];
 }
 
-function GET_CURRENT_USER(language: string | undefined) {
+function GET_CURRENT_USER(language: CurrentLanguage) {
   return gql`
     query {
       search(first: 10, query: "language:${language}", type: REPOSITORY) {
@@ -36,12 +39,12 @@ function GET_CURRENT_USER(language: string | undefined) {
 class App extends React.Component<any, State> {
   state = {
     currentLanguage: undefined,
-    languages: ['javascript', 'ruby', 'python', 'typescript', 'java'],
+    languages: ['javascript', 'ruby', 'python', 'typescript', 'java'] as ValidLanguage[],
   }
 
   componentDidMount() {
     this.setState({
-      currentLanguage: this.state.languages[0],
+      currentLanguage: this.state.languages[0] as ValidLanguage,
     });
   }
 
@@ -49,7 +52,7 @@ class App extends React.Component<any, State> {
     return (this.state.currentLanguage !== nextState.currentLanguage);
   }
 
-  changeCurrentLanguage = (language: string) => {
+  changeCurrentLanguage = (language: ValidLanguage): void => {
     this.setState({
       currentLanguage: language,
     });

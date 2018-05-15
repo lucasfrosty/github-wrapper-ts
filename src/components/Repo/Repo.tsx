@@ -19,14 +19,15 @@ interface Props {
 }
 
 
-function Repo({ repo }: Props) {
-  const {
+function Repo({
+  repo: {
     name,
     stargazers,
     owner,
     nameWithOwner,
     url
-  } = repo;
+  }
+}: Props) {
   return (
     <React.Fragment>
       <div>

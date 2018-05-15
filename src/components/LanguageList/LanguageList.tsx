@@ -1,15 +1,16 @@
 import * as React from 'react';
 import './LanguageList.css';
 
+import { ValidLanguage } from '../App';
 interface Props {
-  languages: string[];
-  onClick: (language: string) => any;
+  languages: ValidLanguage[];
+  onClick: (language: ValidLanguage) => void;
 }
 
 function LanguageList({ languages, onClick }: Props) {
   return (
     <div className="LanguageList">
-      {languages.map(language => {
+      {languages.map((language) => {
         function onClickHandler() {
           onClick(language);
         }
