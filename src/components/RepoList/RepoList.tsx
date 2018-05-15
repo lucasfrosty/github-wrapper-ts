@@ -3,12 +3,14 @@ import './RepoList.css';
 
 interface Props {
   language: string | undefined;
+  viewer?: string;
 }
 
-function RepoList({ language }: Props) {
+function RepoList({ language, viewer }: Props) {
   return (
     <React.Fragment>
       <h1>{language}</h1>
+      <h2>{viewer}</h2>
 
       <div>
         <div className="Flex-Container">
