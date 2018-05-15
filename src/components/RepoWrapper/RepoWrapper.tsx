@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './Repo.css';
+import './RepoWrapper.css';
 
-export interface IRepo {
+export interface Repo {
   name: string;
   url: string;
   nameWithOwner: string;
@@ -15,11 +15,11 @@ export interface IRepo {
 }
 
 interface Props {
-  repo: IRepo;
+  repo: Repo;
 }
 
 
-function Repo({
+function RepoWrapper({
   repo: {
     name,
     stargazers,
@@ -55,4 +55,4 @@ function Repo({
   )
 }
 
-export default Repo;
+export default RepoWrapper;

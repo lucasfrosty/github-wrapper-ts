@@ -1,4 +1,4 @@
 export {
   default as default,
-  IRepo
-} from './Repo';
+  Repo
+} from './RepoWrapper';

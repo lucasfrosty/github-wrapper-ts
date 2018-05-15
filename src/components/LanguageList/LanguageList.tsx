@@ -10,13 +10,15 @@ interface Props {
 function LanguageList({ languages, onClick }: Props) {
   return (
     <div className="LanguageList">
-      {languages.map((language) => {
-        function onClickHandler() {
-          onClick(language);
-        }
-
-        return <button className="LanguageList__Button" key={language} onClick={onClickHandler}>{language}</button>
-      })}
+      {languages.map((language) => (
+        <button
+          className="LanguageList__Button"
+          key={language}
+          onClick={() => onClick(language)} // tslint:disable-line
+        >
+          {language}
+        </button>
+      ))}
     </div>
   );
 }

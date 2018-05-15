@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import LanguageList from '../LanguageList';
-import Repo, { IRepo } from '../Repo';
+import RepoWrapper, { Repo } from '../RepoWrapper';
 
 export type ValidLanguage = 'javascript' | 'ruby' | 'python' | 'typescript' | 'java';
 export type CurrentLanguage = ValidLanguage | undefined;
@@ -72,8 +72,8 @@ class App extends React.Component<any, State> {
           return (
             <div>
               <LanguageList languages={languages} onClick={this.changeCurrentLanguage} />
-              {data.search.nodes.map((repo: IRepo) => (
-                <Repo key={repo.name} repo={repo} />
+              {data.search.nodes.map((repo: Repo) => (
+                <RepoWrapper key={repo.name} repo={repo} />
               ))}
             </div>
           );
